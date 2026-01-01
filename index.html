@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>BDCMUN: Remastered — 2026</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -40,6 +40,7 @@
       background-attachment: fixed;
       background-repeat: no-repeat;
       padding-bottom: 40px;
+      overflow-x: hidden; /* Prevent horizontal page drift */
     }
 
     a{color:inherit;text-decoration:none; transition: color 0.18s;}
@@ -64,14 +65,14 @@
     }
     .eyebrow { font-weight:800; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
 
-    /* header (sticky/follows scroll) */
+    /* --- HEADER (Responsive) --- */
     header.banner {
       background: rgba(6, 34, 63, 0.96);
       backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
       z-index: 999;
-      padding:10px 16px;
+      padding: 10px 16px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.45);
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
@@ -80,11 +81,20 @@
     .brand-logo { width:150px; display:flex; align-items:center; }
     .brand-logo img { width:100%; height:auto; display:block; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
     .brand-title { font-weight:800; font-size: clamp(0.95rem, 0.6rem + 1vw, 1.05rem); color:white; letter-spacing:0.6px; text-transform: uppercase; }
+    .header-actions { display:flex; gap:10px; align-items:center; }
+
+    /* Mobile Header Adjustments */
+    @media (max-width: 650px) {
+      .banner-inner { flex-direction: column; gap: 12px; padding-bottom: 6px; }
+      .brand-left { width: 100%; justify-content: center; text-align: center; }
+      .header-actions { width: 100%; justify-content: center; }
+      .header-actions .btn-primary { flex: 1; padding: 10px; font-size: 0.8rem; }
+      .brand-title { font-size: 0.9rem; }
+    }
 
     /* hero */
     .un-hero { display:flex; flex-direction: column; align-items:center; justify-content:center; min-height:48vh; padding:34px 18px; gap:18px; text-align:center; position: relative; }
-    /* MADE 50% BIGGER: un_logo increased by 50% */
-    .un-logo { width: clamp(240px, 27vw, 480px); height: auto; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); }
+    .un-logo { width: clamp(200px, 35vw, 480px); height: auto; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); }
     .hero-date-big { font-weight:900; color: white; text-shadow: 0 0 20px var(--accent-orange); font-size: clamp(2rem, 6vw, 4rem); letter-spacing: 2px; }
 
     /* cards */
@@ -105,7 +115,10 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.22);
       transition: transform 0.28s var(--ease), box-shadow 0.2s;
     }
-    .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(255,122,0,0.18); }
+    /* Hover effects only on non-touch devices to prevent sticking */
+    @media (hover: hover) {
+        .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(255,122,0,0.18); }
+    }
 
     .hero-panel { border-left: 5px solid var(--accent-orange); background: linear-gradient(to right, rgba(6,34,63,0.92), rgba(6,34,63,0.78)); }
     h1.hero-title { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.6rem); margin:8px 0 12px; line-height:1.05; }
@@ -124,28 +137,64 @@
       box-shadow: 0 6px 18px var(--accent-orange-glow);
       transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
       display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer;
-      min-width: 140px; font-size: 0.92rem;
+      min-width: 140px; font-size: 0.92rem; text-align: center;
     }
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 30px var(--accent-orange-glow); background:#ff8c24; }
+    @media (max-width:480px) {
+        .btn-group { flex-direction: column; width: 100%; }
+        .btn-group .btn-primary { width: 100%; }
+    }
 
-    /* featured committees */
+    /* --- FEATURED COMMITTEES (Desktop Grid) --- */
     .comm-section { margin-top: 36px; margin-bottom: 24px; }
-    .comm-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; }
+    .comm-grid { 
+        display:grid; 
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+        gap:16px; 
+    }
     .comm-card { padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer; }
     .comm-icon { width:64px; height:64px; border-radius:50%; background: var(--dark-blue); border: 2px solid var(--accent-orange); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.15rem; color:var(--accent-orange); box-shadow: 0 8px 20px rgba(0,0,0,0.28); }
     .comm-card:hover .comm-icon { background: var(--accent-orange); color: var(--dark-blue); }
 
+    /* --- FEATURED COMMITTEES (Mobile Horizontal Scroll / Creative Fix) --- */
+    @media (max-width: 768px) {
+        .comm-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 16px;
+            padding-bottom: 20px; /* Space for scrollbar/shadow */
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+            margin: 0 -20px; /* Pull out to edges */
+            padding-left: 20px; /* Push content back in */
+            padding-right: 20px;
+        }
+        .comm-card {
+            flex: 0 0 160px; /* Fixed width cards */
+            scroll-snap-align: start;
+            background: rgba(6, 34, 63, 0.6); /* Give them a card look */
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px 10px;
+        }
+        /* Hide scrollbar but keep functionality */
+        .comm-grid::-webkit-scrollbar { height: 4px; }
+        .comm-grid::-webkit-scrollbar-thumb { background: var(--accent-orange); border-radius: 4px; }
+        .comm-grid::-webkit-scrollbar-track { background: transparent; }
+    }
+
+
     /* registration heads layout and contact pills (fixed overflow) */
     .reg-grid {
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap:18px;
       margin-top: 12px;
     }
-    .reg-head { display:flex; gap:14px; align-items:center; min-width:0; }
-    .reg-avatar { flex:0 0 68px; width:68px; height:68px; border-radius:12px; background: linear-gradient(180deg, rgba(255,122,0,0.14), rgba(255,122,0,0.06)); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.25rem; color:var(--accent-orange); border:1px solid rgba(255,122,0,0.12); }
+    .reg-head { display:flex; gap:14px; align-items:flex-start; min-width:0; }
+    .reg-avatar { flex:0 0 68px; width:68px; height:68px; border-radius:12px; background: linear-gradient(180deg, rgba(255,122,0,0.14), rgba(255,122,0,0.06)); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.25rem; color:var(--accent-orange); border:1px solid rgba(255,122,0,0.12); margin-top: 4px; }
     .reg-body { flex:1 1 auto; min-width:0; }
-    .reg-body h3 { font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.2rem); margin-bottom: 6px; color:white; }
+    .reg-body h3 { font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.2rem); margin-bottom: 6px; color:white; word-wrap: break-word;}
     .reg-body .role { color: var(--accent-orange); font-weight:800; font-size:0.95rem; margin-bottom: 8px; }
     .reg-contacts { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
 
@@ -166,7 +215,7 @@
     @media (max-width:768px) { .council-grid { grid-template-columns: 1fr; } }
 
     .council-person { padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(6,34,63,0.78), rgba(6,34,63,0.7)); border:1px solid var(--glass-border); display:flex; gap:12px; align-items:center; }
-    .c-avatar { width:56px; height:56px; border-radius:10px; background: rgba(255,122,0,0.08); display:flex; align-items:center; justify-content:center; font-weight:900; color: var(--accent-orange); font-size:1.1rem; border:1px solid rgba(255,122,0,0.09); }
+    .c-avatar { width:56px; height:56px; border-radius:10px; background: rgba(255,122,0,0.08); display:flex; align-items:center; justify-content:center; font-weight:900; color: var(--accent-orange); font-size:1.1rem; border:1px solid rgba(255,122,0,0.09); flex-shrink: 0; }
     .c-body h4 { margin-bottom:6px; font-size:1.05rem; color:white; }
     .c-role { color:var(--accent-orange); font-weight:800; margin-bottom:6px; }
     .c-phone a { font-weight:800; color:var(--text-light); text-decoration:none; overflow-wrap:anywhere; }
@@ -181,14 +230,15 @@
     /* modal */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.28s ease; padding:18px; }
     .modal-overlay.active { opacity:1; pointer-events:all; }
-    .modal-content { background: linear-gradient(135deg,#0b2e3f,#06182a); border:1px solid var(--accent-orange); width:100%; max-width:720px; padding:28px; border-radius:16px; color:white; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(12px); transition: transform 0.22s ease; }
+    .modal-content { background: linear-gradient(135deg,#0b2e3f,#06182a); border:1px solid var(--accent-orange); width:100%; max-width:720px; padding:28px; border-radius:16px; color:white; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(12px); transition: transform 0.22s ease; position: relative; }
     .modal-overlay.active .modal-content { transform: translateY(0); }
-    .close-modal { position:absolute; top:14px; right:14px; background:transparent; border:none; color:var(--text-muted); font-size:1.6rem; cursor:pointer; }
+    .close-modal { position:absolute; top:10px; right:14px; background:transparent; border:none; color:var(--text-muted); font-size:2rem; cursor:pointer; line-height: 1;}
 
     @media (max-width:420px){
       .brand-logo { width:120px; }
       .reg-avatar { width:56px; height:56px; font-size:1.05rem; }
-      .btn-primary { min-width: 120px; padding:10px 14px; font-size:0.85rem; }
+      .btn-primary { min-width: 0; padding:10px 14px; font-size:0.85rem; }
+      .container { padding: 20px 16px; } /* Slimmer padding for small screens */
     }
   </style>
 </head>
@@ -198,24 +248,21 @@
     <div class="banner-inner container">
       <div class="brand-left">
         <div class="brand-logo">
-          <img src="images/bcp_logo.png" alt="BDC logo" onerror="this.style.display='none'">
+          <img src="images/bcp_logo.png" alt="BDC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='BDC'">
         </div>
         <div style="display:flex; flex-direction:column;">
           <div class="brand-title">BDCMUN: Remastered</div>
         </div>
       </div>
 
-      <!-- Study Guide + Register (replaced date + campus) -->
-      <div style="display:flex; gap:10px; align-items:center;">
+      <div class="header-actions">
         <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register</a>
-        <!-- STUDY GUIDE LINK -> Google Drive placeholder -->
         <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
       </div>
     </div>
   </header>
 
   <section class="un-hero animate-entry" style="animation-delay: 0.06s;">
-    <!-- using the uploaded image name; replace if your filename differs -->
     <img class="un-logo" src="images/un_logo.png" alt="United Nations Emblem">
     <div class="hero-date-big">23 | 24 | 25</div>
   </section>
@@ -230,7 +277,6 @@
 
           <div class="btn-group">
             <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register Now</a>
-            <!-- hero study guide button now links to Google Drive -->
             <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
           </div>
         </div>
@@ -246,8 +292,10 @@
 
     <section class="comm-section animate-entry" style="animation-delay: 0.2s;">
        <h3 class="section-title">Featured Committees</h3>
-       <!-- restored exactly to original wording and margin -->
-       <p class="text-muted" style="margin-bottom: 20px;">Click a committee to view details</p>
+       <p class="text-muted" style="margin-bottom: 20px;">
+           <span class="desktop-hint">Click a committee to view details</span>
+           <span class="mobile-hint" style="display:none;">Swipe &rarr;</span>
+       </p>
 
        <div class="comm-grid">
          <div class="comm-card" onclick="openModal('unsc')">
@@ -284,7 +332,6 @@
             <div class="role">Director</div>
             <div class="reg-contacts">
               <span class="contact-pill"><strong>Phone</strong>&nbsp; <a class="phone" href="tel:+923264527350">0326 4527350</a></span>
-              <!-- email pill shows only the address (smaller responsive font) -->
               <span class="contact-pill email-pill"><a href="mailto:raffyabdul010@gmail.com">raffyabdul010@gmail.com</a></span>
             </div>
           </div>
@@ -317,11 +364,11 @@
     </section>
 
     <section class="animate-entry" style="margin-top: 26px; animation-delay: 0.36s;">
-        <h3 class="section-title">Still Have Some Questions?</h3>
+        <h3 class="section-title">Still Have Questions?</h3>
         <div class="glass-card coordinator-card">
             <p style="font-size: clamp(1rem, 0.9rem + 0.9vw, 1.1rem);">Contact our <span style="color: var(--accent-orange); font-weight:800;">Executive Council</span></p>
 
-            <div style="margin-top: 14px; display:grid; gap:12px;" class="council-grid">
+            <div style="margin-top: 14px;" class="council-grid">
               <div class="council-person">
                 <div class="c-avatar">SQ</div>
                 <div class="c-body">
@@ -354,7 +401,6 @@
              Lahore, Pakistan.
           </p>
 
-          <!-- Activity Coordinator added before the number (formal, compact layout) -->
           <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);">
               <p style="margin-bottom:6px;"><strong>Activity Coordinator:</strong> Sir Shaheed</p>
               <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923314698618" style="color:var(--text-light);">0331 4698618</a></p>
@@ -365,7 +411,7 @@
 
         <div class="map-container" style="box-shadow: 0 10px 40px rgba(0,0,0,0.45);">
           <iframe 
-            src="https://maps.google.com/maps?q=Beaconhouse%20Defence%20Campus%20Lahore&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+            src="https://maps.google.com/maps?q=Beaconhouse+Defence+Campus+Lahore&t=&z=13&ie=UTF8&iwloc=&output=embed" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade">
@@ -380,7 +426,6 @@
     <p>© BDCMUN: Remastered • Beaconhouse Defence Campus</p>
   </footer>
 
-  <!-- Modal -->
   <div class="modal-overlay" id="infoModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-modal" onclick="closeModal()">×</button>
@@ -390,6 +435,12 @@
   </div>
 
   <script>
+    // Logic to show "Swipe" text on mobile
+    if (window.innerWidth < 768) {
+        document.querySelector('.desktop-hint').style.display = 'none';
+        document.querySelector('.mobile-hint').style.display = 'inline';
+    }
+
     const committees = {
       unsc: { title: 'UN Security Council', content: `The UNSC is responsible for maintaining international peace and security. It meets whenever peace is threatened and has primary responsibility for maintaining peace.` },
       pna: { title: 'Pakistan National Assembly', content: `The PNA is the sovereign legislative body of Pakistan. Delegates will debate national laws, the budget, and exercise control over government expenditure.` },
@@ -411,7 +462,6 @@
     }
 
     function closeModal(e) {
-      // allow clicking backdrop or close button
       if (e && e.target && e.target.id && e.target.id !== 'infoModal') return;
       modal.classList.remove('active');
     }
