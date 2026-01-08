@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>BDCMUN: Remastered — 2026</title>
 
-  <link rel="preload" as="image" href="images/un_logo.avif">
+  <!-- inline favicon to avoid 404 -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect width='100%25' height='100%25' fill='%23FF7A00'/%3E%3C/svg%3E">
 
+  <link rel="preload" as="image" href="images/un_logo.avif">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --dark-blue: #06223f;
@@ -21,15 +24,12 @@
       --card-radius:16px;
       --ease: cubic-bezier(.2,.9,.2,1);
       --base-line-height: 1.6;
-      --header-height: 80px; /* header height for fixed header spacing */
+      --header-height: 84px; /* adjust if you change logo height */
     }
 
-    /* fluid base font */
     html { font-size: clamp(15px, calc(12px + 0.6vw), 18px); }
-
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    
+    *,*::before,*::after { box-sizing: border-box; margin:0; padding:0; }
+    html,body { height:100%; }
     body{
       font-family: 'Merriweather', serif;
       -webkit-font-smoothing:antialiased;
@@ -38,27 +38,26 @@
       min-height:100vh;
       background-image:
         linear-gradient(135deg, rgba(6,34,63,0.9) 0%, rgba(6,34,63,0.75) 50%, rgba(255,122,0,0.12) 100%),
-        url("images/site_bg.avif"); 
+        url("images/site_bg.avif");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
       padding-bottom: 40px;
-      padding-top: var(--header-height); /* prevent header overlap */
-      overflow-x: hidden; 
+      padding-top: var(--header-height); /* keeps content below fixed header */
+      overflow-x: hidden;
     }
 
-    a{color:inherit;text-decoration:none; transition: color 0.18s;}
-    a:hover { color: var(--accent-orange); text-decoration: none; }
+    a { color: inherit; text-decoration: none; transition: color .18s; }
+    a:hover { color: var(--accent-orange); }
 
-    .container { max-width:var(--max-width); margin:0 auto; padding:28px 20px; position:relative; z-index:2; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 28px 20px; position: relative; z-index:2; }
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
-    .animate-entry { animation: fadeInUp 0.9s var(--ease) both; }
+    .animate-entry { animation: fadeInUp .9s var(--ease) both; }
 
-    h1,h2,h3,h4 { color: white; font-weight: 900; letter-spacing: -0.4px; margin-bottom: 0.5rem; }
-    
+    h1,h2,h3,h4 { color: white; font-weight: 900; letter-spacing: -0.4px; margin-bottom: .5rem; }
     .section-title {
       font-size: clamp(1.15rem, 1rem + 1.2vw, 1.9rem);
       color: #fff;
@@ -71,15 +70,13 @@
     }
     .eyebrow { font-weight:800; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
 
-    /* --- HEADER (fixed & accessible) --- */
+    /* ---------- HEADER (REPLACED) ---------- */
     header.banner {
-      background: rgba(6, 34, 63, 0.96);
+      background: rgba(6,34,63,0.96);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      position: fixed; /* fixed to avoid overlap problems on GitHub Pages */
-      top: 0;
-      left: 0;
-      right: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 9999;
       height: var(--header-height);
       padding: 12px 18px;
@@ -87,221 +84,83 @@
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .banner-inner { display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:var(--max-width); margin:0 auto; height:100%; }
-    
-    .brand-left { display:flex; align-items:center; gap:14px; }
+
+    .brand-left { display:flex; align-items:center; gap:14px; flex-shrink:0; }
     .brand-logo { display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .brand-logo img { height:84px; width:auto; display:block; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
-    
-    .brand-text-col { display: flex; flex-direction: column; justify-content: center; }
+    .brand-logo img { height:72px; width:auto; display:block; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
     .brand-title { font-weight:900; font-size: 1.15rem; color:white; letter-spacing:0.5px; text-transform: uppercase; line-height: 1.1; }
-    .brand-subtitle { 
-      font-size: 0.8rem; 
-      color: white;
-      opacity: 0.9;
-      font-weight: 600; 
-      text-transform: uppercase; 
-      letter-spacing: 1px; 
-      margin-top: 2px; 
-    }
 
     .header-actions { display:flex; gap:10px; align-items:center; }
 
-    /* Mobile Header Adjustments - keep logo decent sized */
-    @media (max-width: 700px) {
-      :root { --header-height: 112px; } /* give more vertical space on small devices */
-      .banner-inner { flex-direction: column; gap: 10px; justify-content:center; padding:6px 0; }
+    @media (max-width:700px) {
+      :root { --header-height: 112px; } /* extra vertical room on small screens */
+      .banner-inner { flex-direction: column; gap:10px; justify-content:center; padding:6px 0; }
       .brand-left { width:100%; justify-content:center; text-align:center; }
-      .brand-logo img { height:64px; }
+      .brand-logo img { height:56px; }
       .header-actions { width:100%; justify-content:center; }
-      .header-actions .btn-primary { flex: 1; padding: 10px; font-size: 0.8rem; }
+      .header-actions .btn-primary { flex:1; padding:10px; font-size:0.85rem; }
       .brand-title { font-size: 1rem; }
-      .brand-subtitle { font-size: 0.72rem; }
     }
 
-    /* hero - GAP REDUCED */
-    .un-hero { 
-      display:flex; 
-      flex-direction: column; 
-      align-items:center; 
-      justify-content:center; 
-      min-height: auto; 
-      padding-top: 40px; 
-      padding-bottom: 10px;
-      gap: 10px; 
-      text-align:center; 
-      position: relative; 
-    }
-    
-    .un-logo { 
-      width: clamp(160px, 30vw, 320px); 
-      height: auto; 
-      animation: float 6s ease-in-out infinite; 
-      filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); 
-      will-change: transform;
-    }
-    
-    .hero-date-big { 
-      font-weight:900; 
-      color: white; 
-      text-shadow: 0 0 20px var(--accent-orange); 
-      font-size: clamp(2rem, 6vw, 4rem); 
-      letter-spacing: 2px; 
-      line-height: 1;
-      margin-top: 8px;
-    }
+    /* hero */
+    .un-hero { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:48vh; padding:34px 18px; gap:18px; text-align:center; }
+    .un-logo { width: clamp(220px, 40vw, 420px); height:auto; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); display:block; }
+    .hero-date-big { font-weight:900; color:white; text-shadow: 0 0 20px var(--accent-orange); font-size: clamp(2rem,6vw,4rem); letter-spacing:2px; }
 
-    /* cards */
-    .glass-panel {
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--card-radius);
-      padding: 26px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
-    }
-    .glass-card {
-      background: linear-gradient(180deg, rgba(6,34,63,0.88), rgba(6,34,63,0.72));
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.22);
-      transition: transform 0.28s var(--ease), box-shadow 0.2s;
-    }
-    @media (hover: hover) {
-        .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(255,122,0,0.18); }
-    }
+    /* panels */
+    .glass-panel { background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border:1px solid var(--glass-border); border-radius: var(--card-radius); padding:26px; box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
+    .glass-card { background: linear-gradient(180deg, rgba(6,34,63,0.88), rgba(6,34,63,0.72)); border-radius:12px; border:1px solid var(--glass-border); padding:20px; box-shadow:0 8px 22px rgba(0,0,0,0.22); transition: transform .28s var(--ease), box-shadow .2s; }
+    @media (hover:hover) { .glass-card:hover { transform: translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.35); } }
 
-    .hero-panel { border-left: 5px solid var(--accent-orange); background: linear-gradient(to right, rgba(6,34,63,0.92), rgba(6,34,63,0.78)); }
+    .hero-panel { border-left:5px solid var(--accent-orange); background: linear-gradient(to right, rgba(6,34,63,0.92), rgba(6,34,63,0.78)); }
     h1.hero-title { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.6rem); margin:8px 0 12px; line-height:1.05; }
-    p.lead { font-size: clamp(1rem, 0.9rem + 0.9vw, 1.18rem); color: #dcebf7; margin-bottom: 20px; max-width: 62ch; margin-left:auto; margin-right:auto; }
+    p.lead { font-size: clamp(1rem, 0.9rem + 0.9vw, 1.18rem); color:#dcebf7; margin-bottom:20px; max-width:62ch; margin-left:auto; margin-right:auto; }
 
-    /* buttons */
-    .btn-group { display:flex; gap:12px; flex-wrap:wrap; margin-top: 12px; }
-    .btn-primary {
-      background: var(--accent-orange);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      box-shadow: 0 6px 18px var(--accent-orange-glow);
-      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
-      display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer;
-      min-width: 140px; font-size: 0.92rem; text-align: center;
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 30px var(--accent-orange-glow); background:#ff8c24; }
-    @media (max-width:480px) {
-        .btn-group { flex-direction: column; width: 100%; }
-        .btn-group .btn-primary { width: 100%; }
-    }
+    .btn-group { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
+    .btn-primary { background:var(--accent-orange); color:white; padding:12px 20px; border-radius:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.6px; box-shadow:0 6px 18px var(--accent-orange-glow); transition: transform .18s; display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer; min-width:140px; font-size:.92rem; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow:0 14px 30px var(--accent-orange-glow); background:#ff8c24; }
 
-    /* --- FEATURED COMMITTEES (Desktop Grid) --- */
-    .comm-section { margin-top: 36px; margin-bottom: 24px; }
-    .comm-grid { 
-        display:grid; 
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-        gap:16px; 
-    }
-    .comm-card { padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer; }
-    .comm-icon { width:64px; height:64px; border-radius:50%; background: var(--dark-blue); border: 2px solid var(--accent-orange); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.15rem; color:var(--accent-orange); box-shadow: 0 8px 20px rgba(0,0,0,0.28); }
-    .comm-card:hover .comm-icon { background: var(--accent-orange); color: var(--dark-blue); }
+    /* simple grids kept from your page */
+    .comm-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-top:15px; }
+    .comm-card { padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer; background: rgba(6,34,63,0.6); border-radius:12px; border:1px solid rgba(255,255,255,0.06); }
+    .comm-icon { width:64px; height:64px; border-radius:50%; background: var(--dark-blue); border:2px solid var(--accent-orange); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.15rem; color:var(--accent-orange); }
 
-    /* --- FEATURED COMMITTEES (Mobile Horizontal Scroll) --- */
-    @media (max-width: 768px) {
-        .comm-grid {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 16px;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
-            margin: 0 -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        .comm-card {
-            flex: 0 0 160px;
-            scroll-snap-align: start;
-            background: rgba(6, 34, 63, 0.6);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 20px 10px;
-        }
-        .comm-grid::-webkit-scrollbar { height: 4px; }
-        .comm-grid::-webkit-scrollbar-thumb { background: var(--accent-orange); border-radius: 4px; }
-        .comm-grid::-webkit-scrollbar-track { background: transparent; }
-    }
-
-
-    /* registration heads layout */
-    .reg-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap:18px;
-      margin-top: 12px;
-    }
+    .reg-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:12px; }
     .reg-head { display:flex; gap:14px; align-items:flex-start; min-width:0; }
-    .reg-avatar { flex:0 0 60px; width:60px; height:60px; border-radius:12px; background: linear-gradient(180deg, rgba(255,122,0,0.14), rgba(255,122,0,0.06)); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.25rem; color:var(--accent-orange); border:1px solid rgba(255,122,0,0.12); margin-top: 4px; }
-    .reg-body { flex:1 1 auto; min-width:0; }
-    .reg-body h3 { font-size: clamp(1rem, 0.9rem + 0.8vw, 1.2rem); margin-bottom: 6px; color:white; word-wrap: break-word;}
-    .reg-body .role { color: var(--accent-orange); font-weight:800; font-size:0.95rem; margin-bottom: 8px; }
-    .reg-contacts { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .reg-avatar { flex:0 0 60px; width:60px; height:60px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.25rem; color:var(--accent-orange); background: linear-gradient(180deg, rgba(255,122,0,0.14), rgba(255,122,0,0.06)); border:1px solid rgba(255,122,0,0.12); margin-top:4px; }
+    .contact-pill { display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:8px; background: rgba(255,255,255,0.02); color:var(--text-muted); border:1px solid rgba(255,255,255,0.04); overflow-wrap:anywhere; }
+    .contact-pill a { color:var(--text-light); font-weight:700; text-decoration:none; }
 
-    /* contact pills */
-    .contact-pill {
-      display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:8px; border: 1px solid rgba(255,255,255,0.04);
-      background: rgba(255,255,255,0.02); font-size:0.9rem; color:var(--text-muted);
-      min-width:0; max-width:100%; flex: 0 1 auto; overflow-wrap:anywhere;
-    }
-    .contact-pill a { color:var(--text-light); font-weight:700; text-decoration:none; overflow-wrap:anywhere; word-break:break-word; }
-    .email-pill { white-space: nowrap; } 
-
-    /* Executive council */
-    .council-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; align-items:stretch; margin-top:12px; }
-    @media (max-width:768px) { .council-grid { grid-template-columns: 1fr; } }
-
-    .council-person { padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(6,34,63,0.78), rgba(6,34,63,0.7)); border:1px solid var(--glass-border); display:flex; gap:12px; align-items:center; }
-    .c-avatar { width:56px; height:56px; border-radius:10px; background: rgba(255,122,0,0.08); display:flex; align-items:center; justify-content:center; font-weight:900; color: var(--accent-orange); font-size:1.1rem; border:1px solid rgba(255,122,0,0.09); flex-shrink: 0; }
-    .c-body h4 { margin-bottom:6px; font-size:1.05rem; color:white; }
-    .c-role { color:var(--accent-orange); font-weight:800; margin-bottom:6px; }
-    .c-phone a { font-weight:800; color:var(--text-light); text-decoration:none; overflow-wrap:anywhere; }
-
-    /* map + location */
     .two-col-grid { display:grid; grid-template-columns: 1fr 1fr; gap:22px; }
-    @media (max-width: 980px){ .two-col-grid { grid-template-columns: 1fr; } }
-    .map-container iframe { width:100%; height:100%; min-height:300px; border-radius:12px; border:2px solid rgba(255,255,255,0.09); display:block; }
+    @media (max-width:980px) { .two-col-grid { grid-template-columns: 1fr; } }
 
-    footer { padding:34px 20px; text-align:center; color: var(--text-muted); font-size:0.95rem; margin-top: 34px; border-top: 1px solid rgba(255,255,255,0.04); }
+    footer { padding:34px 20px; text-align:center; color:var(--text-muted); font-size:.95rem; margin-top:34px; border-top:1px solid rgba(255,255,255,0.04); }
 
-    /* modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.28s ease; padding:18px; }
+    .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .28s ease; padding:18px; }
     .modal-overlay.active { opacity:1; pointer-events:all; }
-    .modal-content { background: linear-gradient(135deg,#0b2e3f,#06182a); border:1px solid var(--accent-orange); width:100%; max-width:720px; padding:28px; border-radius:16px; color:white; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(12px); transition: transform 0.22s ease; position: relative; }
-    .modal-overlay.active .modal-content { transform: translateY(0); }
-    .close-modal { position:absolute; top:10px; right:14px; background:transparent; border:none; color:var(--text-muted); font-size:2rem; cursor:pointer; line-height: 1;}
+    .modal-content { background: linear-gradient(135deg,#0b2e3f,#06182a); border:1px solid var(--accent-orange); width:100%; max-width:720px; padding:28px; border-radius:16px; color:white; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(12px); transition:transform .22s ease; position:relative; }
+    .close-modal { position:absolute; top:10px; right:14px; background:transparent; border:none; color:var(--text-muted); font-size:2rem; cursor:pointer; line-height:1; }
 
-    @media (max-width:420px){
+    @media (max-width:420px) {
       .reg-avatar { width:50px; height:50px; font-size:1.05rem; }
-      .btn-primary { min-width: 0; padding:10px 14px; font-size:0.85rem; }
-      .container { padding: 20px 16px; } 
-      .glass-panel { padding: 20px; }
+      .btn-primary { min-width:0; padding:10px 14px; font-size:0.85rem; }
+      .container { padding:20px 16px; }
+      .glass-panel { padding:20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ---------- Replaced header (clean, fixed) ---------- -->
+  <!-- ---------- HEADER (clean, no subtitle) ---------- -->
   <header class="banner animate-entry" role="banner" aria-label="Main header">
     <div class="banner-inner container">
       <div class="brand-left">
         <div class="brand-logo" aria-hidden="true">
-          <img src="images/bcp_logo.png" alt="BCP Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<strong style=&quot;color:var(--accent-orange);font-size:1.05rem;&quot;>BDC</strong>';">
+          <!-- use avif if you uploaded that; fallback handled by onerror -->
+          <img src="images/bcp_logo.avif" alt="BDC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<strong style=&quot;color:var(--accent-orange);font-size:1.05rem;&quot;>BDC</strong>';">
         </div>
-        <div class="brand-text-col">
+        <div>
           <div class="brand-title">BDCMUN: Remastered</div>
-          <div class="brand-subtitle">Defence Campus</div>
         </div>
       </div>
 
@@ -313,68 +172,50 @@
   </header>
   <!-- ---------- end header ---------- -->
 
-  <section class="un-hero animate-entry" style="animation-delay: 0.06s;">
-    <img class="un-logo" src="images/un_logo.avif" alt="United Nations Emblem" fetchpriority="high">
+  <section class="un-hero animate-entry" style="animation-delay:.06s;">
+    <img class="un-logo" src="images/un_logo.avif" alt="United Nations Emblem" fetchpriority="high" loading="eager">
     <div class="hero-date-big">23 | 24 | 25</div>
   </section>
 
   <main class="container">
-    <section class="hero-block animate-entry" style="animation-delay: 0.12s;">
-      <div class="hero-inner" style="display:block;">
-        <div class="glass-panel hero-panel" style="margin-bottom:18px;">
-          <div class="eyebrow">The Legacy Continues</div>
-          <h1 class="hero-title">BDCMUN: Remastered — 2026</h1>
-          <p class="lead">A formal three-day simulation of international diplomacy. <br><span style="color:var(--accent-orange); font-weight:800">23 - 25 January</span> • Beaconhouse Defence Campus, Lahore.</p>
-
-          <div class="btn-group">
-            <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register Now</a>
-            <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
-          </div>
+    <section class="hero-block animate-entry" style="animation-delay:.12s;">
+      <div class="glass-panel hero-panel" style="margin-bottom:18px;">
+        <div class="eyebrow">The Legacy Continues</div>
+        <h1 class="hero-title">BDCMUN: Remastered — 2026</h1>
+        <p class="lead">A formal three-day simulation of international diplomacy. <br><span style="color:var(--accent-orange); font-weight:800">23 - 25 January</span> • Beaconhouse Defence Campus, Lahore.</p>
+        <div class="btn-group">
+          <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register Now</a>
+          <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
         </div>
+      </div>
 
-        <div class="glass-panel" style="padding:20px;">
-           <h3 style="color:var(--accent-orange); margin-bottom:8px;">About</h3>
-           <p style="font-size:clamp(0.95rem, 0.8rem + 0.9vw, 1.05rem); line-height:1.55;">
-            BDCMUN: Remastered aims to foster fairness in the debating circuit through its randomised country allotment process, through which we will engender confidence in delegates irrespective of their institutional background. This revolutionary allotment process and our impartial judging establish BDCMUN as a hub of high-quality debate that circumvents institutional bias and cultivates knowledgeable, eloquent leaders.
-           </p>
-        </div>
+      <div class="glass-panel" style="padding:20px;">
+         <h3 style="color:var(--accent-orange); margin-bottom:8px;">About</h3>
+         <p style="font-size:clamp(.95rem, .8rem + .9vw, 1.05rem); line-height:1.55;">
+          BDCMUN: Remastered aims to foster fairness in the debating circuit through its randomized country allotment process, giving delegates confidence regardless of institutional background.
+         </p>
       </div>
     </section>
 
-    <section class="comm-section animate-entry" style="animation-delay: 0.2s;">
-       <h3 class="section-title">Featured Committees</h3>
-       <p class="text-muted" style="margin-bottom: 20px;">
-           <span class="desktop-hint">Click a committee to view details</span>
-           <span class="mobile-hint" style="display:none;">Swipe →</span>
-       </p>
+    <section class="comm-section animate-entry" style="animation-delay:.2s;">
+      <h3 class="section-title">Featured Committees</h3>
+      <p class="text-muted" style="margin-bottom:20px;">
+        <span class="desktop-hint">Click a committee to view details</span>
+        <span class="mobile-hint" style="display:none;">Swipe →</span>
+      </p>
 
-       <div class="comm-grid">
-         <div class="comm-card" onclick="openModal('unsc')">
-           <div class="comm-icon">UN</div>
-           <div class="comm-body"><span class="title">UNSC</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('pna')">
-           <div class="comm-icon">PA</div>
-           <div class="comm-body"><span class="title">PNA</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('unwomen')">
-           <div class="comm-icon">UW</div>
-           <div class="comm-body"><span class="title">UN Women</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('sochum')">
-           <div class="comm-icon">SC</div>
-           <div class="comm-body"><span class="title">SOCHUM</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('crisis')">
-           <div class="comm-icon">CR</div>
-           <div class="comm-body"><span class="title">Crisis</span></div>
-         </div>
-       </div>
+      <div class="comm-grid">
+        <div class="comm-card" onclick="openModal('unsc')"><div class="comm-icon">UN</div><div class="comm-body"><span class="title">UNSC</span></div></div>
+        <div class="comm-card" onclick="openModal('pna')"><div class="comm-icon">PA</div><div class="comm-body"><span class="title">PNA</span></div></div>
+        <div class="comm-card" onclick="openModal('unwomen')"><div class="comm-icon">UW</div><div class="comm-body"><span class="title">UN Women</span></div></div>
+        <div class="comm-card" onclick="openModal('sochum')"><div class="comm-icon">SC</div><div class="comm-body"><span class="title">SOCHUM</span></div></div>
+        <div class="comm-card" onclick="openModal('crisis')"><div class="comm-icon">CR</div><div class="comm-body"><span class="title">Crisis</span></div></div>
+      </div>
     </section>
 
-    <section class="animate-entry" style="animation-delay: 0.28s;">
+    <!-- registration heads, council, location, modal etc. kept as before -->
+    <section class="animate-entry" style="animation-delay:.28s;">
       <h3 class="section-title">Registration Heads</h3>
-
       <div class="reg-grid">
         <div class="glass-card reg-head">
           <div class="reg-avatar">AR</div>
@@ -414,87 +255,64 @@
       </div>
     </section>
 
-    <section class="animate-entry" style="margin-top: 26px; animation-delay: 0.36s;">
-        <h3 class="section-title">Still Have Questions?</h3>
-        <div class="glass-card coordinator-card">
-            <p style="font-size: clamp(1rem, 0.9rem + 0.9vw, 1.1rem);">Contact our <span style="color: var(--accent-orange); font-weight:800;">Executive Council</span></p>
+    <section class="animate-entry" style="margin-top:26px; animation-delay:.36s;">
+      <h3 class="section-title">Still Have Questions?</h3>
+      <div class="glass-card coordinator-card">
+        <p style="font-size: clamp(1rem, 0.9rem + 0.9vw, 1.1rem);">Contact our <span style="color: var(--accent-orange); font-weight:800;">Executive Council</span></p>
 
-            <div style="margin-top: 14px;" class="council-grid">
-              <div class="council-person">
-                <div class="c-avatar">SQ</div>
-                <div class="c-body">
-                  <h4>Saad Qazi</h4>
-                  <div class="c-role">MUN President</div>
-                  <div class="c-phone"><a href="tel:+923024278618">0302 4278618</a></div>
-                </div>
-              </div>
-
-              <div class="council-person">
-                <div class="c-avatar">MB</div>
-                <div class="c-body">
-                  <h4>Mustafa Bashir</h4>
-                  <div class="c-role">MUN Vice President</div>
-                  <div class="c-phone"><a href="tel:+923340710170">0334 0710170</a></div>
-                </div>
-              </div>
+        <div style="margin-top:14px;" class="council-grid">
+          <div class="council-person">
+            <div class="c-avatar">SQ</div>
+            <div class="c-body">
+              <h4>Saad Qazi</h4>
+              <div class="c-role">MUN President</div>
+              <div class="c-phone"><a href="tel:+923024278618">0302 4278618</a></div>
             </div>
+          </div>
+
+          <div class="council-person">
+            <div class="c-avatar">MB</div>
+            <div class="c-body">
+              <h4>Mustafa Bashir</h4>
+              <div class="c-role">MUN Vice President</div>
+              <div class="c-phone"><a href="tel:+923340710170">0334 0710170</a></div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section class="animate-entry" style="margin-top: 34px; animation-delay: 0.44s;">
+    <section class="animate-entry" style="margin-top:34px; animation-delay:.44s;">
       <h3 class="section-title">Our Location</h3>
       <div class="two-col-grid" style="margin-top:12px;">
         <div class="glass-card" style="display:flex; flex-direction:column; justify-content:center;">
           <h4 style="margin-bottom:10px; color: var(--accent-orange);">Campus Address</h4>
           <p style="font-size: clamp(1rem, 0.9rem + 0.8vw, 1.12rem); line-height:1.6;">
-             488, Y Block, Phase-III,<br>
-             Sector Y, DHA Phase 3,<br>
-             Lahore, Pakistan.
+            488, Y Block, Phase-III,<br>Sector Y, DHA Phase 3,<br>Lahore, Pakistan.
           </p>
-
-          <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);">
-            <p style="margin-bottom:6px; color: var(--accent-orange);">
-              <strong>Activity Coordinator:</strong> 
-              <span style="color: white;">Sir Shaheed</span>
-            </p>
-            <p style="margin-bottom:6px;">
-              <strong>Phone:</strong> 
-              <a href="tel:+923314698618" style="color:var(--text-light);">0331 4698618</a>
-            </p>
-
-            <p style="margin-bottom:6px; color: var(--accent-orange);">
-              <strong>Debates Coach:</strong> 
-              <span style="color: white;">Sheharyar Husham</span>
-            </p>
-            <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923060621669" style="color:var(--text-light);">0306 0621669</a></p>
+          <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);">
+            <p style="margin-bottom:6px; color:var(--accent-orange);"><strong>Activity Coordinator:</strong> <span style="color:white;">Sir Shaheed</span></p>
+            <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923314698618" style="color:var(--text-light);">0331 4698618</a></p>
+            <p style="margin-bottom:6px; color:var(--accent-orange);"><strong>Debates Coach:</strong> <span style="color:white;">Sheharyar Husham</span></p>
+            <p><strong>Phone:</strong> <a href="tel:+923060621669" style="color:var(--text-light);">0306 0621669</a></p>
           </div>
         </div>
 
-        <div class="map-container" style="box-shadow: 0 10px 40px rgba(0,0,0,0.45);">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.551804705359!2d74.38096187515256!3d31.48152574906233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391905df75685711%3A0xc3f7a4911365110e!2sBeaconhouse%20School%20System%20Defence%20Campus%20(BSS)!5e0!3m2!1sen!2s!4v1709923456789!5m2!1sen!2s" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+        <div class="map-container" style="box-shadow:0 10px 40px rgba(0,0,0,0.45);">
+          <iframe src="https://maps.google.com/maps?q=Beaconhouse+Defence+Campus+Lahore&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" style="width:100%;height:100%;min-height:260px;border:0;border-radius:12px;"></iframe>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer>
-    <p>© BDCMUN: Remastered • Beaconhouse Defence Campus</p>
-  </footer>
+  <footer><p>© BDCMUN: Remastered • Beaconhouse Defence Campus</p></footer>
 
   <div class="modal-overlay" id="infoModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-modal" onclick="closeModal()">×</button>
       <h2 id="modalTitle" style="color:var(--accent-orange); margin-bottom:12px;">Committee Title</h2>
-      <p id="modalDesc" style="line-height:1.7; color: #dcebf7;">Description goes here...</p>
+      <p id="modalDesc" style="line-height:1.7; color:#dcebf7;">Description goes here...</p>
     </div>
   </div>
 
@@ -503,20 +321,20 @@
     (function(){
       try {
         if (window.innerWidth < 768) {
-          const desktop = document.querySelector('.desktop-hint');
-          const mobile = document.querySelector('.mobile-hint');
-          if (desktop) desktop.style.display = 'none';
-          if (mobile) mobile.style.display = 'inline';
+          const d = document.querySelector('.desktop-hint');
+          const m = document.querySelector('.mobile-hint');
+          if (d) d.style.display = 'none';
+          if (m) m.style.display = 'inline';
         }
-      } catch(e) { /* ignore */ }
+      } catch(e){}
     })();
 
     const committees = {
-      unsc: { title: 'UN Security Council', content: `The UNSC is responsible for maintaining international peace and security. It meets whenever peace is threatened and has primary responsibility for maintaining peace.` },
-      pna: { title: 'Pakistan National Assembly', content: `The PNA is the sovereign legislative body of Pakistan. Delegates will debate national laws, the budget, and exercise control over government expenditure.` },
-      unwomen: { title: 'UN Women', content: `UN Women exists to advance women’s rights and the empowerment of all women and girls. This committee plays a central role in shaping international norms.` },
-      sochum: { title: 'SOCHUM', content: `The Social, Humanitarian & Cultural Committee focuses on human rights, social issues, and the advancement of women, children, and indigenous peoples.` },
-      crisis: { title: 'Crisis', content: `A fast-paced, scenario-driven simulation. Delegates must respond to unfolding emergencies in real-time, drafting directives and reacting to updates.` } 
+      unsc: { title: 'UN Security Council', content: 'The UNSC is responsible for maintaining international peace and security.' },
+      pna: { title: 'Pakistan National Assembly', content: 'The PNA is the sovereign legislative body of Pakistan.' },
+      unwomen: { title: 'UN Women', content: 'UN Women exists to advance women’s rights and the empowerment of women and girls.' },
+      sochum: { title: 'SOCHUM', content: 'Social, Humanitarian & Cultural Committee.' },
+      crisis: { title: 'Crisis', content: 'A fast-paced, scenario-driven simulation.' }
     };
 
     const modal = document.getElementById('infoModal');
@@ -524,7 +342,7 @@
     const modalDesc = document.getElementById('modalDesc');
 
     function openModal(id) {
-      if(committees[id]){
+      if (committees[id]) {
         modalTitle.innerText = committees[id].title;
         modalDesc.innerText = committees[id].content;
         modal.classList.add('active');
@@ -532,18 +350,12 @@
     }
 
     function closeModal(e) {
-      // close when clicking the overlay or when called programmatically
-      if (!e || e.target === modal) {
-        modal.classList.remove('active');
-      }
+      if (!e || e.target === modal) modal.classList.remove('active');
     }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        modal.classList.remove('active');
-      }
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') modal.classList.remove('active');
     });
   </script>
-
 </body>
 </html>
