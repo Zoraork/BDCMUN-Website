@@ -23,9 +23,7 @@
       --base-line-height: 1.6;
     }
 
-    /* fluid base font */
     html { font-size: clamp(15px, calc(12px + 0.6vw), 18px); }
-
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
     
@@ -69,7 +67,7 @@
     }
     .eyebrow { font-weight:800; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
 
-    /* --- HEADER (Optimized) --- */
+    /* --- HEADER FIX --- */
     header.banner {
       background: rgba(6, 34, 63, 0.96);
       backdrop-filter: blur(8px);
@@ -77,71 +75,53 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      padding: 10px 16px;
+      padding: 12px 16px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.45);
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
-    .banner-inner { display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:var(--max-width); margin:0 auto; }
+    .banner-inner { display:flex; align-items:center; justify-content:space-between; gap:20px; max-width:var(--max-width); margin:0 auto; }
     
-    .brand-left { display:flex; align-items:center; gap:14px; }
-    .brand-logo { width:65px; height: auto; flex-shrink: 0; display:flex; align-items: center;}
-    .brand-logo img { width:100%; height:auto; display:block; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
+    .brand-left { display:flex; align-items:center; gap:16px; flex-shrink: 1; }
+    .brand-logo { width:75px; height: auto; display:flex; align-items: center; flex-shrink: 0; }
+    .brand-logo img { width:100%; height:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
     
-    .brand-text-col { display: flex; flex-direction: column; justify-content: center; }
-    .brand-title { font-weight:900; font-size: 1.15rem; color:white; letter-spacing:0.5px; text-transform: uppercase; line-height: 1.1; }
-    .brand-subtitle { 
-      font-size: 0.8rem; 
-      color: white; /* Made white as requested */
-      opacity: 0.9;
-      font-weight: 600; 
+    .brand-title { 
+      font-weight:900; 
+      font-size: 1.35rem; 
+      color:white; 
+      letter-spacing:0.5px; 
       text-transform: uppercase; 
-      letter-spacing: 1px; 
-      margin-top: 2px; 
+      line-height: 1.1; 
     }
 
-    .header-actions { display:flex; gap:10px; align-items:center; }
+    .header-actions { display:flex; gap:12px; align-items:center; flex-shrink: 0; }
 
-    /* Mobile Header Adjustments - Side by Side to keep logo big */
-    @media (max-width: 700px) {
-      .banner-inner { flex-direction: column; gap: 12px; padding-bottom: 8px; }
-      
-      .brand-left { 
-        width: 100%; 
-        justify-content: flex-start; /* Keep left aligned or center? Let's center for balance */
-        justify-content: center; 
-        text-align: left; /* Keep text left aligned relative to itself */
-      }
-      
-      .brand-logo { width: 55px; /* Kept respectable size */ }
-      .brand-title { font-size: 1rem; }
-      .brand-subtitle { font-size: 0.7rem; letter-spacing: 0.8px; }
-
-      .header-actions { width: 100%; justify-content: center; }
-      .header-actions .btn-primary { flex: 1; padding: 10px; font-size: 0.8rem; }
+    @media (max-width: 768px) {
+      .banner-inner { flex-direction: column; gap: 15px; padding: 10px 0; }
+      .brand-left { width: 100%; justify-content: center; }
+      .brand-logo { width: 60px; }
+      .brand-title { font-size: 1.1rem; text-align: center; }
+      .header-actions { width: 100%; }
+      .header-actions .btn-primary { flex: 1; padding: 10px; font-size: 0.85rem; }
     }
 
-    /* hero - GAP REDUCED */
+    /* HERO SECTION: REMOVED GAPS */
     .un-hero { 
       display:flex; 
       flex-direction: column; 
       align-items:center; 
       justify-content:center; 
-      /* Reduced min-height to remove gap */
       min-height: auto; 
-      padding-top: 40px; 
-      padding-bottom: 10px;
-      gap: 10px; /* Tighter gap between logo and date */
+      padding: 40px 20px 20px 20px; 
+      gap: 15px; 
       text-align:center; 
-      position: relative; 
     }
     
     .un-logo { 
-      /* Restrain width to help with "gap" feeling on large screens */
-      width: clamp(160px, 30vw, 320px); 
+      width: clamp(180px, 35vw, 320px); 
       height: auto; 
       animation: float 6s ease-in-out infinite; 
       filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); 
-      /* Will change property to transform for performance */
       will-change: transform;
     }
     
@@ -149,13 +129,12 @@
       font-weight:900; 
       color: white; 
       text-shadow: 0 0 20px var(--accent-orange); 
-      font-size: clamp(2rem, 6vw, 4rem); 
+      font-size: clamp(2.2rem, 8vw, 4.5rem); 
       letter-spacing: 2px; 
       line-height: 1;
-      margin-top: 8px;
     }
 
-    /* cards */
+    /* CONTENT PANELS */
     .glass-panel {
       background: var(--glass-bg);
       backdrop-filter: blur(10px);
@@ -173,372 +152,181 @@
       box-shadow: 0 8px 22px rgba(0,0,0,0.22);
       transition: transform 0.28s var(--ease), box-shadow 0.2s;
     }
-    /* Hover effects only on non-touch devices to prevent sticking */
     @media (hover: hover) {
-        .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(255,122,0,0.18); }
+        .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
     }
 
-    .hero-panel { border-left: 5px solid var(--accent-orange); background: linear-gradient(to right, rgba(6,34,63,0.92), rgba(6,34,63,0.78)); }
-    h1.hero-title { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.6rem); margin:8px 0 12px; line-height:1.05; }
-    p.lead { font-size: clamp(1rem, 0.9rem + 0.9vw, 1.18rem); color: #dcebf7; margin-bottom: 20px; max-width: 62ch; margin-left:auto; margin-right:auto; }
+    .hero-panel { border-left: 5px solid var(--accent-orange); }
+    h1.hero-title { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.6rem); margin:8px 0 12px; }
+    p.lead { font-size: clamp(1rem, 0.9rem + 0.9vw, 1.18rem); color: #dcebf7; margin-bottom: 20px; }
 
-    /* buttons */
-    .btn-group { display:flex; gap:12px; flex-wrap:wrap; margin-top: 12px; }
+    .btn-group { display:flex; gap:12px; flex-wrap:wrap; }
     .btn-primary {
       background: var(--accent-orange);
       color: white;
-      padding: 12px 20px;
+      padding: 12px 24px;
       border-radius: 10px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.6px;
       box-shadow: 0 6px 18px var(--accent-orange-glow);
-      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      transition: 0.18s;
       display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer;
-      min-width: 140px; font-size: 0.92rem; text-align: center;
+      font-size: 0.92rem;
     }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 30px var(--accent-orange-glow); background:#ff8c24; }
-    @media (max-width:480px) {
-        .btn-group { flex-direction: column; width: 100%; }
-        .btn-group .btn-primary { width: 100%; }
-    }
+    .btn-primary:hover { transform: translateY(-3px); background:#ff8c24; }
 
-    /* --- FEATURED COMMITTEES (Desktop Grid) --- */
-    .comm-section { margin-top: 36px; margin-bottom: 24px; }
-    .comm-grid { 
-        display:grid; 
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-        gap:16px; 
-    }
+    /* COMMITTEES GRID */
+    .comm-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-top: 15px; }
     .comm-card { padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer; }
-    .comm-icon { width:64px; height:64px; border-radius:50%; background: var(--dark-blue); border: 2px solid var(--accent-orange); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.15rem; color:var(--accent-orange); box-shadow: 0 8px 20px rgba(0,0,0,0.28); }
-    .comm-card:hover .comm-icon { background: var(--accent-orange); color: var(--dark-blue); }
+    .comm-icon { width:64px; height:64px; border-radius:50%; background: var(--dark-blue); border: 2px solid var(--accent-orange); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.15rem; color:var(--accent-orange); }
 
-    /* --- FEATURED COMMITTEES (Mobile Horizontal Scroll) --- */
     @media (max-width: 768px) {
-        .comm-grid {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 16px;
-            padding-bottom: 20px;
-            -webkit-overflow-scrolling: touch;
-            margin: 0 -20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        .comm-card {
-            flex: 0 0 160px;
-            scroll-snap-align: start;
-            background: rgba(6, 34, 63, 0.6);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 20px 10px;
-        }
-        .comm-grid::-webkit-scrollbar { height: 4px; }
-        .comm-grid::-webkit-scrollbar-thumb { background: var(--accent-orange); border-radius: 4px; }
-        .comm-grid::-webkit-scrollbar-track { background: transparent; }
+        .comm-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 20px 20px 20px; margin: 0 -20px; }
+        .comm-card { flex: 0 0 160px; scroll-snap-align: start; }
+        .mobile-hint { display: inline !important; font-size: 0.8rem; opacity: 0.7; }
+        .desktop-hint { display: none; }
     }
 
+    /* REGISTRATION & COUNCIL */
+    .reg-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px; margin-top: 12px; }
+    .reg-head { display:flex; gap:14px; align-items:flex-start; }
+    .reg-avatar { flex:0 0 60px; height:60px; border-radius:12px; background: rgba(255,122,0,0.1); display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--accent-orange); border:1px solid rgba(255,122,0,0.12); }
+    .reg-body h3 { font-size: 1.1rem; margin-bottom: 4px; }
+    .role { color: var(--accent-orange); font-weight:800; font-size:0.9rem; margin-bottom: 8px; }
+    .contact-pill { display:inline-flex; padding:5px 10px; border-radius:6px; background: rgba(255,255,255,0.03); font-size:0.85rem; margin: 2px 0; border: 1px solid rgba(255,255,255,0.05); }
 
-    /* registration heads layout */
-    .reg-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap:18px;
-      margin-top: 12px;
-    }
-    .reg-head { display:flex; gap:14px; align-items:flex-start; min-width:0; }
-    .reg-avatar { flex:0 0 60px; width:60px; height:60px; border-radius:12px; background: linear-gradient(180deg, rgba(255,122,0,0.14), rgba(255,122,0,0.06)); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:1.25rem; color:var(--accent-orange); border:1px solid rgba(255,122,0,0.12); margin-top: 4px; }
-    .reg-body { flex:1 1 auto; min-width:0; }
-    .reg-body h3 { font-size: clamp(1rem, 0.9rem + 0.8vw, 1.2rem); margin-bottom: 6px; color:white; word-wrap: break-word;}
-    .reg-body .role { color: var(--accent-orange); font-weight:800; font-size:0.95rem; margin-bottom: 8px; }
-    .reg-contacts { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .council-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-top:12px; }
+    .council-person { padding:15px; border-radius:12px; background: rgba(6,34,63,0.7); border:1px solid var(--glass-border); display:flex; gap:15px; align-items:center; }
+    .c-avatar { width:50px; height:50px; border-radius:50%; background: var(--accent-orange); color: white; display:flex; align-items:center; justify-content:center; font-weight:900; }
 
-    /* contact pills */
-    .contact-pill {
-      display:inline-flex; gap:8px; align-items:center; padding:6px 10px; border-radius:8px; border: 1px solid rgba(255,255,255,0.04);
-      background: rgba(255,255,255,0.02); font-size:0.9rem; color:var(--text-muted);
-      min-width:0; max-width:100%; flex: 0 1 auto; overflow-wrap:anywhere;
-    }
-    .contact-pill a { color:var(--text-light); font-weight:700; text-decoration:none; overflow-wrap:anywhere; word-break:break-word; }
-    .email-pill { white-space: nowrap; } 
-
-    /* Executive council */
-    .council-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; align-items:stretch; margin-top:12px; }
-    @media (max-width:768px) { .council-grid { grid-template-columns: 1fr; } }
-
-    .council-person { padding:14px; border-radius:12px; background: linear-gradient(180deg, rgba(6,34,63,0.78), rgba(6,34,63,0.7)); border:1px solid var(--glass-border); display:flex; gap:12px; align-items:center; }
-    .c-avatar { width:56px; height:56px; border-radius:10px; background: rgba(255,122,0,0.08); display:flex; align-items:center; justify-content:center; font-weight:900; color: var(--accent-orange); font-size:1.1rem; border:1px solid rgba(255,122,0,0.09); flex-shrink: 0; }
-    .c-body h4 { margin-bottom:6px; font-size:1.05rem; color:white; }
-    .c-role { color:var(--accent-orange); font-weight:800; margin-bottom:6px; }
-    .c-phone a { font-weight:800; color:var(--text-light); text-decoration:none; overflow-wrap:anywhere; }
-
-    /* map + location */
-    .two-col-grid { display:grid; grid-template-columns: 1fr 1fr; gap:22px; }
+    /* MAP FIX */
+    .two-col-grid { display:grid; grid-template-columns: 1fr 1.2fr; gap:22px; margin-top: 15px; }
     @media (max-width: 980px){ .two-col-grid { grid-template-columns: 1fr; } }
-    .map-container iframe { width:100%; height:100%; min-height:300px; border-radius:12px; border:2px solid rgba(255,255,255,0.09); display:block; }
+    .map-container { height: 350px; border-radius: 12px; overflow: hidden; }
 
-    footer { padding:34px 20px; text-align:center; color: var(--text-muted); font-size:0.95rem; margin-top: 34px; border-top: 1px solid rgba(255,255,255,0.04); }
+    footer { padding:40px 20px; text-align:center; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
 
-    /* modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.28s ease; padding:18px; }
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 1000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:0.3s; padding:20px; }
     .modal-overlay.active { opacity:1; pointer-events:all; }
-    .modal-content { background: linear-gradient(135deg,#0b2e3f,#06182a); border:1px solid var(--accent-orange); width:100%; max-width:720px; padding:28px; border-radius:16px; color:white; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(12px); transition: transform 0.22s ease; position: relative; }
-    .modal-overlay.active .modal-content { transform: translateY(0); }
-    .close-modal { position:absolute; top:10px; right:14px; background:transparent; border:none; color:var(--text-muted); font-size:2rem; cursor:pointer; line-height: 1;}
-
-    @media (max-width:420px){
-      .reg-avatar { width:50px; height:50px; font-size:1.05rem; }
-      .btn-primary { min-width: 0; padding:10px 14px; font-size:0.85rem; }
-      .container { padding: 20px 16px; } 
-      .glass-panel { padding: 20px; }
-    }
+    .modal-content { background: #06182a; border:1px solid var(--accent-orange); max-width:600px; padding:30px; border-radius:16px; position: relative; }
+    .close-modal { position:absolute; top:15px; right:20px; background:none; border:none; color:white; font-size:2rem; cursor:pointer; }
   </style>
 </head>
 <body>
 
   <header class="banner animate-entry">
-    <div class="banner-inner container">
-      <div class="brand-left">
-        <div class="brand-logo">
-          <img src="images/bcp_logo.png" alt="BDC logo" onerror="this.style.display='none'; this.parentElement.innerHTML='BDC'">
-        </div>
-        <div style="display:flex; flex-direction:column;">
-          <div class="brand-title">BDCMUN: Remastered</div>
-        </div>
-      </div>
+    <div class="banner-inner container">
+      <div class="brand-left">
+        <div class="brand-logo">
+          <img src="images/bcp_logo.png" alt="BCP Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='BDC'">
+        </div>
+        <div class="brand-title">BDCMUN: Remastered</div>
+      </div>
+      <div class="header-actions">
+        <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank">Register</a>
+        <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank">Study Guides</a>
+      </div>
+    </div>
+  </header>
 
-      <div class="header-actions">
-        <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register</a>
-        <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
-      </div>
-    </div>
-  </header>
-
-  <section class="un-hero animate-entry" style="animation-delay: 0.06s;">
-    <img class="un-logo" src="images/un_logo.avif" alt="United Nations Emblem" fetchpriority="high">
+  <section class="un-hero animate-entry">
+    <img class="un-logo" src="images/un_logo.avif" alt="UN Logo" fetchpriority="high">
     <div class="hero-date-big">23 | 24 | 25</div>
   </section>
 
   <main class="container">
-    <section class="hero-block animate-entry" style="animation-delay: 0.12s;">
-      <div class="hero-inner" style="display:block;">
-        <div class="glass-panel hero-panel" style="margin-bottom:18px;">
-          <div class="eyebrow">The Legacy Continues</div>
-          <h1 class="hero-title">BDCMUN: Remastered — 2026</h1>
-          <p class="lead">A formal three-day simulation of international diplomacy. <br><span style="color:var(--accent-orange); font-weight:800">23 - 25 January</span> • Beaconhouse Defence Campus, Lahore.</p>
-
-          <div class="btn-group">
-            <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register Now</a>
-            <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
-          </div>
-        </div>
-
-        <div class="glass-panel" style="padding:20px;">
-           <h3 style="color:var(--accent-orange); margin-bottom:8px;">About</h3>
-           <p style="font-size:clamp(0.95rem, 0.8rem + 0.9vw, 1.05rem); line-height:1.55;">
-            BDCMUN: Remastered aims to foster fairness in the debating circuit through its randomised country allotment process, through which we will engender confidence in delegates irrespective of their institutional background. This revolutionary allotment process and our impartial judging establish BDCMUN as a hub of high-quality debate that circumvents institutional bias and cultivates knowledgeable, eloquent leaders.
-           </p>
+    <section class="animate-entry" style="animation-delay: 0.1s;">
+      <div class="glass-panel hero-panel">
+        <div class="eyebrow">The Legacy Continues</div>
+        <h1 class="hero-title">BDCMUN: Remastered — 2026</h1>
+        <p class="lead">A formal three-day simulation of international diplomacy. <br><span style="color:var(--accent-orange); font-weight:800">23 - 25 January</span> • Beaconhouse Defence Campus, Lahore.</p>
+        <div class="btn-group">
+          <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank">Join the Conference</a>
         </div>
       </div>
     </section>
 
     <section class="comm-section animate-entry" style="animation-delay: 0.2s;">
-       <h3 class="section-title">Featured Committees</h3>
-       <p class="text-muted" style="margin-bottom: 20px;">
-           <span class="desktop-hint">Click a committee to view details</span>
-           <span class="mobile-hint" style="display:none;">Swipe →</span>
-       </p>
-
+       <h3 class="section-title">Committees</h3>
+       <p class="text-muted"><span class="desktop-hint">Click for details</span><span class="mobile-hint" style="display:none;">Swipe for more →</span></p>
        <div class="comm-grid">
-         <div class="comm-card" onclick="openModal('unsc')">
-           <div class="comm-icon">UN</div>
-           <div class="comm-body"><span class="title">UNSC</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('pna')">
-           <div class="comm-icon">PA</div>
-           <div class="comm-body"><span class="title">PNA</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('unwomen')">
-           <div class="comm-icon">UW</div>
-           <div class="comm-body"><span class="title">UN Women</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('sochum')">
-           <div class="comm-icon">SC</div>
-           <div class="comm-body"><span class="title">SOCHUM</span></div>
-         </div>
-         <div class="comm-card" onclick="openModal('crisis')">
-           <div class="comm-icon">CR</div>
-           <div class="comm-body"><span class="title">Crisis</span></div>
-         </div>
+         <div class="comm-card glass-card" onclick="openModal('unsc')"><div class="comm-icon">UN</div><span class="title">UNSC</span></div>
+         <div class="comm-card glass-card" onclick="openModal('pna')"><div class="comm-icon">PA</div><span class="title">PNA</span></div>
+         <div class="comm-card glass-card" onclick="openModal('unwomen')"><div class="comm-icon">UW</div><span class="title">UN Women</span></div>
+         <div class="comm-card glass-card" onclick="openModal('sochum')"><div class="comm-icon">SC</div><span class="title">SOCHUM</span></div>
+         <div class="comm-card glass-card" onclick="openModal('crisis')"><div class="comm-icon">CR</div><span class="title">Crisis</span></div>
        </div>
     </section>
 
-    <section class="animate-entry" style="animation-delay: 0.28s;">
+    <section class="animate-entry" style="animation-delay: 0.3s; margin-top: 40px;">
       <h3 class="section-title">Registration Heads</h3>
-
       <div class="reg-grid">
         <div class="glass-card reg-head">
           <div class="reg-avatar">AR</div>
-          <div class="reg-body">
-            <h3>Abdul Raffay</h3>
-            <div class="role">Director</div>
-            <div class="reg-contacts">
-              <span class="contact-pill"><strong>Phone</strong> <a class="phone" href="tel:+923264527350">0326 4527350</a></span>
-              <span class="contact-pill email-pill"><a href="mailto:raffyabdul010@gmail.com">raffyabdul010@gmail.com</a></span>
-            </div>
-          </div>
+          <div class="reg-body"><h3>Abdul Raffay</h3><div class="role">Director</div>
+          <span class="contact-pill"><a href="tel:+923264527350">0326 4527350</a></span></div>
         </div>
-
         <div class="glass-card reg-head">
           <div class="reg-avatar">AH</div>
-          <div class="reg-body">
-            <h3>Ahmed</h3>
-            <div class="role">Co-Director</div>
-            <div class="reg-contacts">
-              <span class="contact-pill"><strong>Phone</strong> <a class="phone" href="tel:+923490042829">0349 0042829</a></span>
-              <span class="contact-pill email-pill"><a href="mailto:Ahmadjhamat89@gmail.com">Ahmadjhamat89@gmail.com</a></span>
-            </div>
-          </div>
+          <div class="reg-body"><h3>Ahmed</h3><div class="role">Co-Director</div>
+          <span class="contact-pill"><a href="tel:+923490042829">0349 0042829</a></span></div>
         </div>
-
         <div class="glass-card reg-head">
           <div class="reg-avatar">MR</div>
-          <div class="reg-body">
-            <h3>Muaaz Rana</h3>
-            <div class="role">Co-Director</div>
-            <div class="reg-contacts">
-              <span class="contact-pill"><strong>Phone</strong> <a class="phone" href="tel:+923360144780">0336 0144780</a></span>
-              <span class="contact-pill email-pill"><a href="mailto:muaazrana16@gmail.com">muaazrana16@gmail.com</a></span>
-            </div>
-          </div>
+          <div class="reg-body"><h3>Muaaz Rana</h3><div class="role">Co-Director</div>
+          <span class="contact-pill"><a href="tel:+923360144780">0336 0144780</a></span></div>
         </div>
       </div>
     </section>
 
-    <section class="animate-entry" style="margin-top: 26px; animation-delay: 0.36s;">
-        <h3 class="section-title">Still Have Questions?</h3>
-        <div class="glass-card coordinator-card">
-            <p style="font-size: clamp(1rem, 0.9rem + 0.9vw, 1.1rem);">Contact our <span style="color: var(--accent-orange); font-weight:800;">Executive Council</span></p>
-
-            <div style="margin-top: 14px;" class="council-grid">
-              <div class="council-person">
-                <div class="c-avatar">SQ</div>
-                <div class="c-body">
-                  <h4>Saad Qazi</h4>
-                  <div class="c-role">MUN President</div>
-                  <div class="c-phone"><a href="tel:+923024278618">0302 4278618</a></div>
-                </div>
-              </div>
-
-              <div class="council-person">
-                <div class="c-avatar">MB</div>
-                <div class="c-body">
-                  <h4>Mustafa Bashir</h4>
-                  <div class="c-role">MUN Vice President</div>
-                  <div class="c-phone"><a href="tel:+923340710170">0334 0710170</a></div>
-                </div>
-              </div>
-            </div>
+    <section class="animate-entry" style="animation-delay: 0.4s; margin-top: 40px;">
+      <h3 class="section-title">Location & Contact</h3>
+      <div class="two-col-grid">
+        <div class="glass-card">
+          <h4 style="color:var(--accent-orange)">Campus</h4>
+          <p>488, Y Block, Phase-III, DHA Phase 3, Lahore.</p>
+          <hr style="margin: 15px 0; opacity: 0.1;">
+          <p><strong>Coordinator:</strong> Sir Shaheed</p>
+          <p><a href="tel:+923314698618">0331 4698618</a></p>
+          <p style="margin-top: 10px;"><strong>President:</strong> Saad Qazi</p>
+          <p><a href="tel:+923024278618">0302 4278618</a></p>
         </div>
-    </section>
-
-    <section class="animate-entry" style="margin-top: 34px; animation-delay: 0.44s;">
-      <h3 class="section-title">Our Location</h3>
-      <div class="two-col-grid" style="margin-top:12px;">
-        <div class="glass-card" style="display:flex; flex-direction:column; justify-content:center;">
-          <h4 style="margin-bottom:10px; color: var(--accent-orange);">Campus Address</h4>
-          <p style="font-size: clamp(1rem, 0.9rem + 0.8vw, 1.12rem); line-height:1.6;">
-             488, Y Block, Phase-III,<br>
-             Sector Y, DHA Phase 3,<br>
-             Lahore, Pakistan.
-          </p>
-
-          <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);">
-            <p style="margin-bottom:6px; color: var(--accent-orange);">
-              <strong>Activity Coordinator:</strong> 
-              <span style="color: white;">Sir Shaheed</span>
-            </p>
-            <p style="margin-bottom:6px;">
-              <strong>Phone:</strong> 
-              <a href="tel:+923314698618" style="color:var(--text-light);">0331 4698618</a>
-            </p>
-
-            <p style="margin-bottom:6px; color: var(--accent-orange);">
-              <strong>Debates Coach:</strong> 
-              <span style="color: white;">Sheharyar Husham</span>
-            </p>
-            <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923060621669" style="color:var(--text-light);">0306 0621669</a></p>
-          </div>
-        </div>
-
-        <div class="map-container" style="box-shadow: 0 10px 40px rgba(0,0,0,0.45);">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.551804705359!2d74.38096187515256!3d31.48152574906233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391905df75685711%3A0xc3f7a4911365110e!2sBeaconhouse%20School%20System%20Defence%20Campus%20(BSS)!5e0!3m2!1sen!2s!4v1709923456789!5m2!1sen!2s" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+        <div class="map-container glass-card" style="padding:0">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3401.357065611158!2d74.3736855!3d31.4720173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391905f963333333%3A0x673c683713063f90!2sBeaconhouse%20Defence%20Campus!5e0!3m2!1sen!2spk!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
-    <p>© BDCMUN: Remastered • Beaconhouse Defence Campus</p>
+    <p>© 2026 BDCMUN: Remastered • Beaconhouse Defence Campus</p>
   </footer>
 
   <div class="modal-overlay" id="infoModal" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-content">
       <button class="close-modal" onclick="closeModal()">×</button>
-      <h2 id="modalTitle" style="color:var(--accent-orange); margin-bottom:12px;">Committee Title</h2>
-      <p id="modalDesc" style="line-height:1.7; color: #dcebf7;">Description goes here...</p>
+      <h2 id="modalTitle" style="color:var(--accent-orange); margin-bottom:15px;"></h2>
+      <p id="modalDesc" style="line-height:1.7; opacity: 0.9;"></p>
     </div>
   </div>
 
   <script>
-    // Logic to show "Swipe" text on mobile
-    if (window.innerWidth < 768) {
-        document.querySelector('.desktop-hint').style.display = 'none';
-        document.querySelector('.mobile-hint').style.display = 'inline';
-    }
-
     const committees = {
-      unsc: { title: 'UN Security Council', content: `The United Nations Security Council (UNSC) is responsible for maintaining international peace and security. It meets whenever peace is threatened and has primary responsibility for maintaining peace. The UNSC makes decisions that member states must implement and has 15 members, including 5 permanent members. It is responsible for admitting new members and imposing sanctions. The UNSC works to prevent conflict and promote disarmament, and its decisions are binding on all member states.` },
-      pna: { title: 'Pakistan National Assembly', content: `The Pakistan National Assembly (PNA) is the sovereign legislative body of Pakistan, embodying the will of the people to be governed democratically. The PNA makes laws for the Federation and exercises control of expenditure, scrutinizing public spending through its Public Accounts Committee. Comprising members elected by direct and free vote, the PNA works to ensure the government functions within constitutional parameters, promoting diversity and representation of federating units.` },
-      unwomen: { title: 'UN Women', content: `UN Women exists to advance women’s rights, gender equality, and the empowerment of all women and girls. It is the primary arbitrator over the UN Commission on the Status of Women, being jn charge of the creation, modification, and repudiation of norms regarding the equality of women. It's services are key to closing the gender gap and building an equal world for all women and girls.` },
-      sochum: { title: 'SOCHUM', content: `The Social, Humanitarian and Cultural Committee (SOCHUM) examines human rights questions and reports. It discusses social, humanitarian, and cultural issues, focusing on the advancement of women, children, and indigenous issues. SOCHUM addresses refugee treatment, racism, and self-determination, and examines social development questions like youth and family issues. The committee promotes fundamental freedoms and human rights, working to eliminate discrimination and promote equality.` },
-      crisis: { title: 'Crisis', content: `A fast-paced, scenario-driven special committee in the Model UN conference. Delegates must respond to unfolding emergencies in real-time, drafting directives and reacting to updates.` } 
+      unsc: { title: 'UN Security Council', content: 'The UNSC maintains international peace and security. It is the only UN body with the power to issue binding resolutions to member states.' },
+      pna: { title: 'Pakistan National Assembly', content: 'The sovereign legislative body of Pakistan. Delegates will navigate national law-making, budgetary oversight, and political strategy.' },
+      unwomen: { title: 'UN Women', content: 'Dedicated to gender equality and the empowerment of women. A global champion for women and girls, accelerating progress worldwide.' },
+      sochum: { title: 'SOCHUM', content: 'The Social, Humanitarian and Cultural Committee focuses on human rights, fundamental freedoms, and social development.' },
+      crisis: { title: 'Crisis', content: 'A fast-paced simulation where delegates react to real-time updates and emergency scenarios requiring immediate action.' }
     };
 
-    const modal = document.getElementById('infoModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-
     function openModal(id) {
-      if(committees[id]){
-        modalTitle.innerText = committees[id].title;
-        modalDesc.innerText = committees[id].content;
-        modal.classList.add('active');
-      }
+      document.getElementById('modalTitle').innerText = committees[id].title;
+      document.getElementById('modalDesc').innerText = committees[id].content;
+      document.getElementById('infoModal').classList.add('active');
     }
-
-    function closeModal(e) {
-      if (e && e.target && e.target.id && e.target.id !== 'infoModal') return;
-      modal.classList.remove('active');
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
-        modal.classList.remove('active');
-      }
-    });
+    function closeModal() { document.getElementById('infoModal').classList.remove('active'); }
   </script>
-
 </body>
 </html>
