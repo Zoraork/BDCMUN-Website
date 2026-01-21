@@ -224,6 +224,60 @@
       .glass-panel { padding:20px; }
       .council-person { gap:10px; padding:10px; }
     }
+
+    /* ---------- MOBILE HORIZONTAL SCROLL FOR FEATURED COMMITTEES + EDGE FADES ---------- */
+    @media (max-width: 768px) {
+      .comm-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 14px;
+        padding-bottom: 10px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        position: relative; /* for pseudo-element fades */
+      }
+
+      .comm-grid::-webkit-scrollbar {
+        display: none; /* clean iOS/Android look */
+      }
+
+      .comm-card {
+        flex: 0 0 75%;
+        max-width: 75%;
+        scroll-snap-align: start;
+      }
+
+      /* Edge fades to hint at scrollability */
+      .comm-grid::before,
+      .comm-grid::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 48px;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      /* left fade (covers left edge, fading to transparent to the right) */
+      .comm-grid::before {
+        left: 0;
+        background: linear-gradient(to right, var(--glass-bg) 0%, rgba(6,34,63,0.0) 100%);
+      }
+
+      /* right fade (covers right edge, fading to transparent to the left) */
+      .comm-grid::after {
+        right: 0;
+        background: linear-gradient(to left, var(--glass-bg) 0%, rgba(6,34,63,0.0) 100%);
+      }
+
+      /* reduce fade width on very small screens */
+      @media (max-width: 420px) {
+        .comm-grid::before,
+        .comm-grid::after { width: 34px; }
+      }
+    }
   </style>
 </head>
 <body>
