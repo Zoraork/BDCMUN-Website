@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>BDCMUN: Remastered — 2026</title>
 
-
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Crect width='100%25' height='100%25' fill='%23FF7A00'/%3E%3C/svg%3E">
-
 
   <link rel="preload" as="image" href="images/un_logo.avif">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
-
 
   <style>
     :root{
@@ -28,7 +25,6 @@
       --base-line-height: 1.6;
       --header-height: 84px;
     }
-
 
     html { font-size: clamp(15px, calc(12px + 0.6vw), 18px); }
     *,*::before,*::after { box-sizing: border-box; margin:0; padding:0; }
@@ -51,18 +47,14 @@
       overflow-x: hidden;
     }
 
-
     a { color: inherit; text-decoration: none; transition: color .18s; }
     a:hover { color: var(--accent-orange); }
 
-
     .container { max-width: var(--max-width); margin: 0 auto; padding: 28px 20px; position: relative; z-index:2; }
-
 
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
     .animate-entry { animation: fadeInUp .9s var(--ease) both; }
-
 
     h1,h2,h3,h4 { color: white; font-weight: 900; letter-spacing: -0.4px; margin-bottom: .5rem; }
     .section-title {
@@ -76,7 +68,6 @@
       margin-bottom: 12px;
     }
     .eyebrow { font-weight:800; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
-
 
     /* ---------- HEADER ---------- */
     header.banner {
@@ -93,50 +84,45 @@
     }
     .banner-inner { display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:var(--max-width); margin:0 auto; height:100%; }
 
-
     .brand-left { display:flex; align-items:center; gap:14px; flex-shrink:0; }
     .brand-logo { display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .brand-logo img { height:72px; width:auto; display:block; object-fit:contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
     .brand-title { font-weight:900; font-size: 1.15rem; color:white; letter-spacing:0.5px; text-transform: uppercase; line-height: 1.1; }
 
-
     .header-actions { display:flex; gap:10px; align-items:center; }
 
-
     @media (max-width:700px) {
-      :root { --header-height: 112px; }
-      .banner-inner { flex-direction: column; gap:10px; justify-content:center; padding:6px 0; }
+      body { padding-top: 135px; }
+      header.banner { height: auto; padding: 10px 14px; }
+      .banner-inner { flex-direction: column; gap:8px; justify-content:center; }
       .brand-left { width:100%; justify-content:center; text-align:center; }
-      .brand-logo img { height:56px; }
-      .header-actions { width:100%; justify-content:center; }
-      .header-actions .btn-primary { flex:1; padding:10px; font-size:0.85rem; }
-      .brand-title { font-size: 1rem; }
+      .brand-logo img { height:48px; }
+      .header-actions { width:100%; justify-content:center; flex-wrap: wrap; gap: 6px; }
+      .header-actions .btn-primary { flex:1 1 auto; padding:8px 10px; font-size:0.78rem; min-width:0; }
+      .brand-title { font-size: 0.95rem; }
     }
-
 
     /* Hero */
     .un-hero { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:48vh; padding:34px 18px; gap:18px; text-align:center; }
     .un-logo { width: clamp(220px, 40vw, 420px); height:auto; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); display:block; }
     .hero-date-big { font-weight:900; color:white; text-shadow: 0 0 20px var(--accent-orange); font-size: clamp(2rem,6vw,4rem); letter-spacing:2px; }
 
-
     /* Panels & Cards */
     .glass-panel { background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border:1px solid var(--glass-border); border-radius: var(--card-radius); padding:26px; box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
     .glass-card { background: linear-gradient(180deg, rgba(6,34,63,0.88), rgba(6,34,63,0.72)); border-radius:12px; border:1px solid var(--glass-border); padding:20px; box-shadow:0 8px 22px rgba(0,0,0,0.22); transition: transform .28s var(--ease), box-shadow .2s; }
     @media (hover:hover) { .glass-card:hover { transform: translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.35); } }
 
-
     .hero-panel { border-left:5px solid var(--accent-orange); background: linear-gradient(to right, rgba(6,34,63,0.92), rgba(6,34,63,0.78)); }
     h1.hero-title { font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.6rem); margin:8px 0 12px; line-height:1.05; }
     p.lead { font-size: clamp(1rem, 0.9rem + 0.9vw, 1.18rem); color:#dcebf7; margin-bottom:20px; max-width:62ch; margin-left:auto; margin-right:auto; }
 
-
     .btn-group { display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
-    .btn-primary { background:var(--accent-orange); color:white; padding:12px 20px; border-radius:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.6px; box-shadow:0 6px 18px var(--accent-orange-glow); transition: transform .18s; display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer; min-width:140px; font-size:.92rem; }
+    .btn-primary { background:var(--accent-orange); color:white; padding:12px 20px; border-radius:10px; font-weight:900; text-transform:uppercase; letter-spacing:0.6px; box-shadow:0 6px 18px var(--accent-orange-glow); transition: transform .18s; display:inline-flex; align-items:center; justify-content:center; border:none; cursor:pointer; min-width:140px; font-size:.92rem; }
     .btn-primary:hover { transform: translateY(-3px); box-shadow:0 14px 30px var(--accent-orange-glow); background:#ff8c24; }
 
-
     /* Committees */
+    .desktop-hint { display: inline; }
+    .mobile-hint { display: none; }
     .comm-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-top:15px; }
     .comm-card { padding:18px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px; cursor:pointer; background: rgba(6,34,63,0.6); border-radius:12px; border:1px solid rgba(255,255,255,0.06); }
    
@@ -153,7 +139,6 @@
     }
     .comm-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-
     /* Registration Section */
     .reg-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:12px; }
     .reg-head { display:flex; gap:14px; align-items:flex-start; min-width:0; }
@@ -162,9 +147,9 @@
     .reg-body h3 { font-size: 1.1rem; margin-bottom: 2px; line-height: 1.3; overflow-wrap: break-word; }
    
     .reg-contacts { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; width: 100%; }
-    .contact-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.03); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; width: 100%; }
+    .contact-pill { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px; padding: 6px 10px; border-radius: 8px; background: rgba(255,255,255,0.03); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; width: 100%; }
+    .contact-pill strong { flex-shrink: 0; }
     .contact-pill a { color: var(--text-light); font-weight: 700; text-decoration: none; word-break: break-all; }
-
 
     .role, .c-role {
       color: var(--accent-orange);
@@ -172,7 +157,6 @@
       margin-top: 2px;
       font-size: 0.88rem;
     }
-
 
     /* Executive Council */
     .coordinator-card { padding: 22px; }
@@ -185,7 +169,6 @@
       width: 100%;
     }
 
-
     .council-person {
       display: flex;
       align-items: center;
@@ -197,7 +180,6 @@
       background: rgba(255,255,255,0.02);
       border: 1px solid rgba(255,255,255,0.04);
     }
-
 
     .c-avatar {
       flex: 0 0 56px;
@@ -215,26 +197,21 @@
       flex-shrink: 0;
     }
 
-
     .c-body { display:flex; flex-direction:column; gap:2px; min-width:0; flex:1; }
     .c-body h4 { font-size: 1rem; margin-bottom: 0; overflow-wrap: break-word; }
     .c-phone { margin-top: 4px; font-size: 0.9rem; }
     .c-phone a { color:var(--text-light); text-decoration:none; font-weight:700; }
 
-
     .two-col-grid { display:grid; grid-template-columns: 1fr 1fr; gap:22px; }
     @media (max-width:980px) { .two-col-grid { grid-template-columns: 1fr; } }
 
-
     footer { padding:34px 20px; text-align:center; color:var(--text-muted); font-size:.95rem; margin-top:34px; border-top:1px solid rgba(255,255,255,0.04); }
-
 
     /* Modal */
     .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:10000; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .28s ease; padding:18px; }
     .modal-overlay.active { opacity:1; pointer-events:all; }
     .modal-content { background: linear-gradient(135deg,#0b2e3f,#06182a); border:1px solid var(--accent-orange); width:100%; max-width:720px; padding:28px; border-radius:16px; color:white; box-shadow:0 30px 60px rgba(0,0,0,0.6); transform: translateY(12px); transition:transform .22s ease; position:relative; }
     .close-modal { position:absolute; top:10px; right:14px; background:transparent; border:none; color:var(--text-muted); font-size:2rem; cursor:pointer; line-height:1; }
-
 
     @media (max-width:420px) {
       .btn-primary { min-width:0; padding:10px 14px; font-size:0.85rem; }
@@ -243,9 +220,10 @@
       .council-person { gap:10px; padding:10px; }
     }
 
-
     /* Mobile Horizontal Scroll for Featured Committees */
     @media (max-width: 768px) {
+      .desktop-hint { display: none; }
+      .mobile-hint { display: inline; }
       .comm-grid {
         display: flex;
         flex-wrap: nowrap;
@@ -263,7 +241,6 @@
 </head>
 <body>
 
-
   <header class="banner animate-entry" role="banner" aria-label="Main header">
     <div class="banner-inner container">
       <div class="brand-left">
@@ -275,20 +252,18 @@
         </div>
       </div>
 
-
       <div class="header-actions" role="navigation" aria-label="Header actions">
-        <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSd88olpZzpUIa7ToPttaZ1KB0xrNDLtI2N9maNLcU6MCz9qSQ/viewform?usp=sharing&ouid=105839483834449377403" target="_blank" rel="noopener">Register</a>
+        <a class="btn-primary" href="https://forms.gle/uxmqBhfQBRvkCJiq8" target="_blank" rel="noopener">Register</a>
+        <a class="btn-primary" href="https://forms.gle/KcBiFCDP8jBSykBU8" target="_blank" rel="noopener">Private Delegates</a>
         <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
       </div>
     </div>
   </header>
 
-
   <section class="un-hero animate-entry" style="animation-delay:.06s;">
     <img class="un-logo" src="images/un_logo.avif" alt="United Nations Emblem" fetchpriority="high" loading="eager">
     <div class="hero-date-big">2 | 3 | 4</div>
   </section>
-
 
   <main class="container">
     <section class="hero-block animate-entry" style="animation-delay:.12s;">
@@ -297,11 +272,11 @@
         <h1 class="hero-title">BDCMUN: Remastered — 2026</h1>
         <p class="lead">A formal three-day simulation of international diplomacy. <br><span style="color:var(--accent-orange); font-weight:800">2 - 4 October</span> • Beaconhouse Defence Campus, Lahore.</p>
         <div class="btn-group">
-          <a class="btn-primary" href="https://forms.gle/2V6cC7zb1DuFaZCL7" target="_blank" rel="noopener">Register Now</a>
+          <a class="btn-primary" href="https://forms.gle/uxmqBhfQBRvkCJiq8" target="_blank" rel="noopener">Register Now</a>
+          <a class="btn-primary" href="https://forms.gle/KcBiFCDP8jBSykBU8" target="_blank" rel="noopener">Private Delegates</a>
           <a class="btn-primary" href="https://drive.google.com/drive/folders/1CfEE82SJTLLgQmpoYb8h_fZDeKU65tFV" target="_blank" rel="noopener">Study Guide</a>
         </div>
       </div>
-
 
       <div class="glass-panel" style="padding:20px;">
          <h3 style="color:var(--accent-orange); margin-bottom:8px;">About</h3>
@@ -311,14 +286,12 @@
       </div>
     </section>
 
-
     <section class="comm-section animate-entry" style="animation-delay:.2s;">
       <h3 class="section-title">Featured Committees</h3>
       <p class="text-muted" style="margin-bottom:20px;">
         <span class="desktop-hint">Click a committee to view details</span>
-        <span class="mobile-hint" style="display:none;">Swipe →</span>
+        <span class="mobile-hint">Swipe →</span>
       </p>
-
 
       <div class="comm-grid">
         <div class="comm-card" onclick="openModal('unsc')">
@@ -344,7 +317,6 @@
       </div>
     </section>
 
-
     <!-- REGISTRATION HEADS SECTION -->
     <section class="animate-entry" style="animation-delay:.28s;">
       <h3 class="section-title">Registration Heads</h3>
@@ -353,14 +325,12 @@
           <div class="reg-avatar">AR</div>
           <div class="reg-body">
             <h3>Abdul Raffay</h3>
-            <div class="role">Director</div>
             <div class="reg-contacts">
               <div class="contact-pill"><strong>Phone:</strong> <a href="tel:+923264527350">0326 4527350</a></div>
-              <div class="contact-pill"><a href="mailto:raffyabdul010@gmail.com">raffyabdul010@gmail.com</a></div>
+              <div class="contact-pill"><strong>Email:</strong> <a href="mailto:raffyabdul010@gmail.com">raffyabdul010@gmail.com</a></div>
             </div>
           </div>
         </div>
-
 
         <div class="glass-card reg-head">
           <div class="reg-avatar">MAC</div>
@@ -368,11 +338,10 @@
             <h3>Mehar Ali Cheema</h3>
             <div class="reg-contacts">
               <div class="contact-pill"><strong>Phone:</strong> <a href="tel:+923224830822">0322 4830822</a></div>
-              <div class="contact-pill"><a href="mailto:themeharalicheema@gmail.com">themeharalicheema@gmail.com</a></div>
+              <div class="contact-pill"><strong>Email:</strong> <a href="mailto:themeharalicheema@gmail.com">themeharalicheema@gmail.com</a></div>
             </div>
           </div>
         </div>
-
 
         <div class="glass-card reg-head">
           <div class="reg-avatar">SB</div>
@@ -380,6 +349,7 @@
             <h3>Syed Shaheer Bukhari</h3>
             <div class="reg-contacts">
               <div class="contact-pill"><strong>Phone:</strong> <a href="tel:+923365103900">0336 5103900</a></div>
+              <div class="contact-pill"><strong>Email:</strong> <a href="mailto:shaheerbukhari31@gmail.com">shaheerbukhari31@gmail.com</a></div>
             </div>
           </div>
         </div>
@@ -390,20 +360,18 @@
             <h3>Abdul Ahad</h3>
             <div class="reg-contacts">
               <div class="contact-pill"><strong>Phone:</strong> <a href="tel:+923263847266">0326 3847266</a></div>
-              <div class="contact-pill"><a href="mailto:abdul.ahad.mx@gmail.com">abdul.ahad.mx@gmail.com</a></div>
+              <div class="contact-pill"><strong>Email:</strong> <a href="mailto:abdul.ahad.mx@gmail.com">abdul.ahad.mx@gmail.com</a></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-
     <!-- EXECUTIVE COUNCIL SECTION -->
     <section class="animate-entry" style="margin-top:26px; animation-delay:.36s;">
       <h3 class="section-title">Still Have Questions?</h3>
       <div class="glass-card coordinator-card">
         <p style="font-size: clamp(1rem, 0.9rem + 0.9vw, 1.1rem); margin-bottom: 6px;">Contact our <span style="color: var(--accent-orange); font-weight:800;">Executive Council</span></p>
-
 
         <div class="council-grid">
           <div class="council-person">
@@ -415,7 +383,6 @@
             </div>
           </div>
 
-
           <div class="council-person">
             <div class="c-avatar">AA</div>
             <div class="c-body">
@@ -424,7 +391,6 @@
               <div class="c-phone"><a href="tel:+923263847266">0326 3847266</a></div>
             </div>
           </div>
-
 
           <div class="council-person">
             <div class="c-avatar">SB</div>
@@ -438,7 +404,6 @@
       </div>
     </section>
 
-
     <!-- LOCATION SECTION -->
     <section class="animate-entry" style="margin-top:34px; animation-delay:.44s;">
       <h3 class="section-title">Our Location</h3>
@@ -449,13 +414,14 @@
             488, Y Block, Phase-III,<br>Sector Y, DHA Phase 3,<br>Lahore, Pakistan.
           </p>
           <div style="margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.06);">
-            <p style="margin-bottom:6px; color:var(--accent-orange);"><strong>Activity Coordinator:</strong> <span style="color:white;">Sir Shaheed</span></p>
-            <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923314698618" style="color:var(--text-light);">0331 4698618</a></p>
+            <p style="margin-bottom:6px; color:var(--accent-orange);"><strong>Activity Coordinator:</strong> <span style="color:white;">Ahmad Tariq Noon</span></p>
+            <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923224050670" style="color:var(--text-light);">0322 4050670</a></p>
+            <p style="margin-bottom:6px; color:var(--accent-orange);"><strong>Activity Coordinator:</strong> <span style="color:white;">Ms Aminah</span></p>
+            <p style="margin-bottom:6px;"><strong>Phone:</strong> <a href="tel:+923028480848" style="color:var(--text-light);">0302 8480848</a></p>
             <p style="margin-bottom:6px; color:var(--accent-orange);"><strong>Debates Coach:</strong> <span style="color:white;">Sheharyar Husham</span></p>
             <p><strong>Phone:</strong> <a href="tel:+923060621669" style="color:var(--text-light);">0306 0621669</a></p>
           </div>
         </div>
-
 
         <div class="map-container" style="box-shadow:0 10px 40px rgba(0,0,0,0.45);">
           <iframe src="https://maps.google.com/maps?q=Beaconhouse+Defence+Campus+Lahore&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" style="width:100%;height:100%;min-height:260px;border:0;border-radius:12px;"></iframe>
@@ -463,12 +429,9 @@
       </div>
     </section>
 
-
   </main>
 
-
   <footer><p>© BDCMUN: Remastered • Beaconhouse Defence Campus</p></footer>
-
 
   <div class="modal-overlay" id="infoModal" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
@@ -478,20 +441,7 @@
     </div>
   </div>
 
-
   <script>
-    (function(){
-      try {
-        if (window.innerWidth < 768) {
-          const d = document.querySelector('.desktop-hint');
-          const m = document.querySelector('.mobile-hint');
-          if (d) d.style.display = 'none';
-          if (m) m.style.display = 'inline';
-        }
-      } catch(e){}
-    })();
-
-
     const committees = {
       unsc: { title: 'United Nations Security Council', content: 'The United Nations Security Council (UNSC) is responsible for maintaining international peace and security. It meets whenever peace is threatened and has primary responsibility for maintaining peace. The UNSC makes decisions that member states must implement and has 15 members, including 5 permanent members. It is responsible for admitting new members and imposing sanctions. The UNSC works to prevent conflict and promote disarmament, and its decisions are binding on all member states.' },
       pna: { title: 'Pakistan National Assembly', content: 'The Pakistan National Assembly (PNA) is the sovereign legislative body of Pakistan, embodying the will of the people to be governed democratically. The PNA makes laws for the Federation and exercises control of expenditure, scrutinizing public spending through its Public Accounts Committee. Comprising members elected by direct and free vote, the PNA works to ensure the government functions within constitutional parameters, promoting diversity and representation of federating units.' },
@@ -500,11 +450,9 @@
       crisis: { title: 'Crisis', content: 'A fast-paced, scenario-driven special committee in the Model UN conference. Delegates must respond to unfolding emergencies in real-time, drafting directives and reacting to updates.' }
     };
 
-
     const modal = document.getElementById('infoModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalDesc = document.getElementById('modalDesc');
-
 
     function openModal(id) {
       if (committees[id]) {
@@ -514,11 +462,9 @@
       }
     }
 
-
     function closeModal(e) {
       if (!e || e.target === modal) modal.classList.remove('active');
     }
-
 
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape') modal.classList.remove('active');
@@ -526,6 +472,3 @@
   </script>
 </body>
 </html>
-
-
-
